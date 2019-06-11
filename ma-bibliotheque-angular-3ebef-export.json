@@ -1,0 +1,23 @@
+{
+  "books" : [ {
+    "author" : "Stephen King",
+    "synopsis" : "Jeune médecin de Chicago, Louis Creed, son épouse Rachel, sa fille Ellie et son fils Gage emménagent à Ludlow, petite bourgade du Maine. En poste à l'université locale, Louis fait également la connaissance de Judson Crandall, son voisin octogénaire qui deviendra son meilleur ami. Au cours d'une promenade, Judson fait découvrir à la famille Creed le « Simetierre », un cimetière d'animaux où des générations d'enfants ont enterré leur animal de compagnie préféré. ",
+      "title" : "Simetierre"
+  }, {
+    "author" : "John Le Carré",
+    "synopsis" : "John Le Carré retrouve son complice de toujours George Smiley dans un nouveau roman, A Legacy of Spies, où son héros de la guerre froide réapparaît après 27 ans de purgatoire pour une déclaration d'amour à l'Europe.",
+    "title" : "A Legacy of Spies"
+  }, {
+    "author" : "Marc Bloch",
+    "synopsis" : "L'histoire rurale française et plus généralement la « nouvelle histoire », celle qui prend sa source aux Annales , sont immensément redevables à Marc Bloch. Les Caractères originaux restent la voie d'accès majeure à la compréhension des civilisations agraires dans leur genèse, leurs éléments structuraux et leurs marges vivantes d'interférence. Mais ce livre n'était pour Marc Bloch qu'une synthèse provisoire.",
+    "title" : "La terre et le paysan"
+  }, {
+    "author" : "Jean-Jacques Rousseau",
+    "synopsis" : "",
+    "title" : "Du Contrat social"
+  }, {
+    "author" : "André Makine",
+    "synopsis" : "Le Testament français est un roman d'inspiration autobiographique écrit par Andreï Makine, publié le 6 septembre 1995 au Mercure de France, et ayant reçu la même année le prix Goncourt, le prix Goncourt des lycéens et le prix Médicis (ex-æquo, pour ce dernier, avec La Langue maternelle de Vassilis Alexakis). ",
+    "title" : "Le testament français"
+  } ]
+}
