@@ -20,24 +20,32 @@ export class BooksService {
     }
 
     saveBooks() {
-	firebase.database().ref('/books').set(this.books);
+	firebase.database().ref('/books') /* accès au node /books */
+		.set(this.books);         /* put : remplace */
     }
-
+    
     getBooks() {
-	firebase.database().ref('/books')
-		.on('value', (data: DataSnapshot) => {
-		    this.books = data.val() ? data.val() : [];
-		    this.emitBooks();
-		}
+	firebase.database().ref('/books') 
+		.on('value', /* réaction synchrone 
+				à chaque événement (value) de la DB
+				le callback est exécuté 
+				à chaque modification de la DB */
+		    (data: DataSnapshot) => /* fonction de réaction */
+			{ 
+			    this.books = data.val() ? data.val() : [];
+			    this.emitBooks(); /* émission du Subject*/
+			}
 		);
     }
-
+    
     getSingleBook(id: number) {
-	return new Promise(
+	return new Promise(  /* réaction asynchrone */
 	    (resolve, reject) => {
-		firebase.database().ref('/books/' + id).once('value').then(
+		firebase.database().ref('/books/' + id)
+			.once('value') /* une fois suffit */
+			.then(
 		    (data: DataSnapshot) => {
-			resolve(data.val());
+			resolve(data.val()); /* valeur issue de DB */
 		    }, (error) => {
 			reject(error);
 		    }
@@ -57,15 +65,16 @@ export class BooksService {
 	if (book.photo){
 	    const storageRef = firebase.storage().refFromURL(book.photo);
 	    /* delete est asynchrone */
-	    storageRef.delete ().then (
-		() => {
-		    console.log('removeBook : Photo supprimée !');
-		}
-	    ).catch (
-		(error) => {
-		    console.log('removeBook : Fichier non trouvé : ', error);
-		}
-	    )
+	    storageRef.delete ()
+		      .then (
+			  () => {
+			      console.log('removeBook : Photo supprimée !');
+			  })
+		      .catch (
+			  (error) => {
+			      console.log('removeBook : Fichier non trouvé : ', error);
+			  }
+		      )
 	}
 	const bookIndexToRemove = this.books.findIndex(
 	    (a_book) => {

@@ -19,19 +19,20 @@ export class SingleBookComponent implements OnInit {
 
     ngOnInit() {
 	console.log ('Entering in ngOnInit');
-	this.book = new Book('', '');
-	const id = this.route.snapshot.params['id'];
-	this.booksService.getSingleBook(+id).then(
-	    (book: Book) => {
-		this.book = book;
-	    }
-	);
+	this.book = new Book('', ''); /* book vide temporaire */
+	const id = this.route.snapshot.params['id'];/* récupération de l'id depuis l'URL*/
+	this.booksService.getSingleBook(+id)
+	    .then(  /* dès que le book est disponible */
+		(book: Book) => {
+		    this.book = book;
+		}
+	    );
     }
-
+    
     onBack() {
 	this.router.navigate(['/books']);
     }
-
+    
     onRemoveBook() {
 	this.booksService.removeBook (this.book);
     }

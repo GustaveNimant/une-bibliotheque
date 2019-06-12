@@ -15,12 +15,14 @@ export class BookListComponent implements OnInit, OnDestroy {
     books: Book[];
     booksSubscription: Subscription;
 
-    constructor(private booksService: BooksService, private router: Router) {}
+    constructor(private booksService: BooksService,
+		private router: Router) {}
 
     ngOnInit() {
+	console.log ('Entering in ngOnInit');
 	this.booksSubscription = this.booksService.booksSubject.subscribe(
-	    (books: Book[]) => {
-		this.books = books;
+	    (books_a: Book[]) => {
+		this.books = books_a;
 	    }
 	);
 	this.booksService.getBooks();
@@ -28,7 +30,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     }
 
     onNewBook() {
-	this.router.navigate(['/books', 'new']);
+	this.router.navigate(['/books', 'new']); /* /books/new */
     }
 
     onDeleteBook(book: Book) {
@@ -36,7 +38,7 @@ export class BookListComponent implements OnInit, OnDestroy {
     }
 
     onViewBook(id: number) {
-	this.router.navigate(['/books', 'view', id]);
+	this.router.navigate(['/books', 'view', id]); /* /books/view/id */
     }
     
     ngOnDestroy() {
