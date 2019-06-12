@@ -9,14 +9,15 @@ import * as firebase from 'firebase';
 
 export class AppComponent {
     constructor() {
-	console.log ('Entering in constructor');
+	console.log ('Entrée dans constructor. Liaison à firebase');
 	const config = {
-	    apiKey: "AIzaSyC7orofw52i-LUF0vbxhNTgjk3Hcr0d5OQ",
-	    authDomain: "ma-bibliotheque-angular-58e80.firebaseapp.com",
-	    databaseURL: "https://ma-bibliotheque-angular-58e80.firebaseio.com",
-	    projectId: "ma-bibliotheque-angular-58e80",
-	    storageBucket: "ma-bibliotheque-angular-58e80.appspot.com",
-	    messagingSenderId: "924683141089"
+	    apiKey: "AIzaSyBRvorDmAKFK9vneHnRsom9mDW398uUxEg",
+	    authDomain: "une-bibliotheque-90c91.firebaseapp.com",
+	    databaseURL: "https://une-bibliotheque-90c91.firebaseio.com",
+	    projectId: "une-bibliotheque-90c91",
+	    storageBucket: "une-bibliotheque-90c91.appspot.com",
+	    messagingSenderId: "1012969104430",
+	    appId: "1:1012969104430:web:815509d2f2949a33"
 	};
 	firebase.initializeApp(config);
     }

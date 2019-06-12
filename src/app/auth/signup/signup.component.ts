@@ -11,11 +11,11 @@ import { Router } from '@angular/router';
 
 export class SignupComponent implements OnInit {
 
-    signupForm: FormGroup;
+    signupForm: FormGroup; /* <form [formGroup]="signupForm" */
     errorMessage: string;
 
-    constructor(private formBuilder: FormBuilder,
-		private authService: AuthService,
+    constructor(private formBuilder: FormBuilder, /* création du formulaire */
+		private authService: AuthService, /* Authentification */
 		private router: Router) { }
 
     ngOnInit() {
@@ -24,8 +24,8 @@ export class SignupComponent implements OnInit {
 
     initForm() {
 	this.signupForm = this.formBuilder.group({
-	    email: ['', [Validators.required, Validators.email]],
-	    password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]]
+	    email: ['', [Validators.required, Validators.email]], /* 2 Validators */
+	    password: ['', [Validators.required, Validators.pattern(/[0-9a-zA-Z]{6,}/)]] /* 6 charactères alpha-numériques */
 	});
     }
 
@@ -37,8 +37,8 @@ export class SignupComponent implements OnInit {
 	    () => {
 		this.router.navigate(['/books']);
 	    },
-	    (error) => {
-		this.errorMessage = error;
+	    (an_error) => {/* affichage dans {{ errorMessage }} du template */
+		this.errorMessage = an_error;
 	    }
 	);
     }
