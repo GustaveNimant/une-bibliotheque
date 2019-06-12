@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import * as firebase from 'firebase';
 
 @Injectable() /* Asynchrone */
+
 export class AuthGuardService implements CanActivate {
 
     constructor(private router: Router) { }
@@ -12,10 +13,10 @@ export class AuthGuardService implements CanActivate {
 	return new Promise(
 	    (resolve, reject) => {
 		firebase.auth().onAuthStateChanged(
-		    (user) => {
-			if(user) {
-			    resolve(true);
-			} else {/* /auth/signin */
+		    (a_user) => {
+			if(a_user) {
+			    resolve(true); /* laisser passer */
+			} else {/* redirigé vers /auth/signin */
 			    this.router.navigate(['/auth', 'signin']);
 			    resolve(false);
 			}
