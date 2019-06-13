@@ -38,7 +38,7 @@ export class SingleBookComponent implements OnInit {
 	this.booksService.removeBook (this.book);
     }
 
-    onRemoveBookById() {
-	this.booksService.removeBookById (this.book);
+    onRemoveBookById(id: number) {
+	this.booksService.removeBookById (id);
     }
 }
