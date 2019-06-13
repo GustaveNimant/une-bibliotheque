@@ -39,18 +39,19 @@ export class BooksService {
     }
     
     getSingleBook(id: number) {
+	console.log('Entering in getSingleBook id', id);
 	return new Promise(  /* réaction asynchrone */
-	    (resolve, reject) => {
-		firebase.database().ref('/books/' + id)
-			.once('value') /* une fois suffit */
-			.then(
-		    (data: DataSnapshot) => {
-			resolve(data.val()); /* valeur issue de DB */
-		    }, (error) => {
-			reject(error);
-		    }
-		);
-	    }
+			     (resolve, reject) => {
+				 firebase.database().ref('/books/' + id)
+					 .once('value') /* une fois suffit */
+					 .then(
+					     (data: DataSnapshot) => {
+						 resolve(data.val()); /* valeur issue de DB */
+					     }, (error) => {
+						 reject(error);
+					     }
+					 );
+			     }
 	);
     }
     
@@ -61,7 +62,8 @@ export class BooksService {
     }
 
     removeBook(book: Book) {
-	console.log('Entering in removeBook');
+	console.log('Entering in removeBook for ',book);
+	console.log('Array books is ',this.books);
 	if (book.photo){
 	    const storageRef = firebase.storage().refFromURL(book.photo);
 	    /* delete est asynchrone */
@@ -77,17 +79,29 @@ export class BooksService {
 		      )
 	}
 	const bookIndexToRemove = this.books.findIndex(
-	    (a_book) => {
-		if(a_book === book) {
+	    (book) => {
+		if(book === book) {
 		    return true;
 		}
 	    }
 	);
+	console.log('bookIndexToRemove ',bookIndexToRemove);
+	if (bookIndexToRemove === -1) {
+	    console.log('Error bookIndexToRemove ',bookIndexToRemove);
+	    this.getBooks();
+	}
 	this.books.splice(bookIndexToRemove, 1);
 	this.saveBooks();
 	this.emitBooks();
     }
-    
+
+    removeBookById(id: number) {
+	console.log('Entering in removeBookById id ',id);
+	this.books.splice(id, 1);
+	this.saveBooks();
+	this.emitBooks();
+    }
+
     uploadFile(file: File) {
 	return new Promise(
 	    (resolve, reject) => {
