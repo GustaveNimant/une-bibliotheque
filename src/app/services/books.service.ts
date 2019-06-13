@@ -64,6 +64,8 @@ export class BooksService {
     removeBook(book: Book) {
 	console.log('Entering in removeBook for ',book);
 	console.log('Array books is ',this.books);
+	const bookType : string = typeof book;
+	console.log('Type of book is ',bookType);
 	if (book.photo){
 	    const storageRef = firebase.storage().refFromURL(book.photo);
 	    /* delete est asynchrone */
@@ -79,11 +81,7 @@ export class BooksService {
 		      )
 	}
 	const bookIndexToRemove = this.books.findIndex(
-	    (book) => {
-		if(book === book) {
-		    return true;
-		}
-	    }
+	    (a_book) => {a_book === book}
 	);
 	console.log('bookIndexToRemove ',bookIndexToRemove);
 	if (bookIndexToRemove === -1) {

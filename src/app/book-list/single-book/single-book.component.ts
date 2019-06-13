@@ -13,7 +13,7 @@ export class SingleBookComponent implements OnInit {
 
     book: Book;
 
-    constructor(private route: ActivatedRoute,
+    constructor(private route: ActivatedRoute,      /* récuperer URL */
 		private booksService: BooksService,
 		private router: Router) {}
 
@@ -21,7 +21,7 @@ export class SingleBookComponent implements OnInit {
 	console.log ('Entering in ngOnInit');
 	this.book = new Book('', '');                /* création d'un book vide temporaire */
 	const id = this.route.snapshot.params['id']; /* récupération de l'id depuis l'URL*/
-	console.log ('Clicked book id', id);
+	console.log ('ngOnInit : clicked book id', id);
 	this.booksService.getSingleBook(+id)
 	    .then(                                   /* dès que le book est disponible */
 						     (book: Book) => {
