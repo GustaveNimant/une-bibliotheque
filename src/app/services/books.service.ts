@@ -97,7 +97,7 @@ export class BooksService {
 		}
 	    }
 	);
-		console.log('bookIndexToRemove ',bookIndexToRemove);
+	console.log('bookIndexToRemove ',bookIndexToRemove);
 	if (bookIndexToRemove === -1) {
 	    console.log('Error bookIndexToRemove ',bookIndexToRemove);
 	    this.getBooks();
