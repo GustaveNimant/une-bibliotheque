@@ -23,10 +23,10 @@ export class SingleBookComponent implements OnInit {
 	const id = this.route.snapshot.params['id']; /* récupération de l'id depuis l'URL*/
 	console.log ('ngOnInit : clicked book id', id);
 	this.booksService.getSingleBook(+id)
-	    .then(                                   /* dès que le book est disponible */
-						     (book: Book) => {
-							 this.book = book;
-						     }
+	    .then( /* dès que le book est disponible */
+		   (book: Book) => {
+		       this.book = book;
+		   }
 	    );
     }
     
@@ -35,6 +35,7 @@ export class SingleBookComponent implements OnInit {
     }
     
     onRemoveBook() {
+	console.log ('Entering in onRemoveBook with book', this.book);
 	this.booksService.removeBook (this.book);
     }
 

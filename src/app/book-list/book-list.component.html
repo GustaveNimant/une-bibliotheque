@@ -4,15 +4,16 @@
 	<div class="list-group">
 	    <button
 		class="list-group-item"
-		*ngFor="let book of books; let id = index"
-		(click)="onViewBook(id)">
+		       *ngFor="let book of books; let id = index"
+		       (click)="onViewBook(id)">
 		<h3 class="list-group-item-heading">
 		    Titre : {{ book.title }}
-		    <!-- Minus to delete -->
+		    <!-- skipped code -->
 		    <button class="btn btn-default pull-right"
 			    (click)="onDeleteBook(book)">
 			<span class="glyphicon glyphicon-minus"></span>
 		    </button>
+		    <!-- end of skipped code -->
 		</h3>
 		<p class="list-group-item-text">
 		    Auteur : {{ book.author }}</p>

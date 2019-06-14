@@ -44,6 +44,9 @@ yarn-error.log
 testem.log
 /typings
 
+KEEP
+.save
+
 # System Files
 .DS_Store
 Thumbs.db

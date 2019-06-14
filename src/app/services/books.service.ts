@@ -81,7 +81,13 @@ export class BooksService {
 		      )
 	}
 	const bookIndexToRemove = this.books.findIndex(
-	    (a_book) => {a_book === book}
+	    (bookEl) => {
+		if ( (bookEl.author === book.author) &&
+		     (bookEl.title === book.title) 
+		) {
+		    return true;
+		}
+	    }
 	);
 	console.log('bookIndexToRemove ',bookIndexToRemove);
 	if (bookIndexToRemove === -1) {
@@ -94,7 +100,7 @@ export class BooksService {
     }
 
     removeBookById(id: number) {
-	console.log('Entering in removeBookById id ',id);
+	console.log('Entering in removeBookById withid ',id);
 	this.books.splice(id, 1);
 	this.saveBooks();
 	this.emitBooks();
