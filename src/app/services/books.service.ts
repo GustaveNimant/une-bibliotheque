@@ -82,14 +82,22 @@ export class BooksService {
 	}
 	const bookIndexToRemove = this.books.findIndex(
 	    (bookEl) => {
-		if ( (bookEl.author === book.author) &&
-		     (bookEl.title === book.title) 
+		if ( (bookEl.author == book.author) &&
+		     (bookEl.title == book.title) &&
+		     (bookEl.synopsis == book.synopsis) 
 		) {
-		    return true;
+		    if (book.photo){
+			if (bookEl.photo == book.photo) {
+			    return true;
+			}
+		    }
+		    else {
+			return true;
+		    }
 		}
 	    }
 	);
-	console.log('bookIndexToRemove ',bookIndexToRemove);
+		console.log('bookIndexToRemove ',bookIndexToRemove);
 	if (bookIndexToRemove === -1) {
 	    console.log('Error bookIndexToRemove ',bookIndexToRemove);
 	    this.getBooks();
