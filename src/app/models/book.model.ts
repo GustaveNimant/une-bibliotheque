@@ -4,5 +4,33 @@ export class Book {
 
     constructor(public title: string, public author: string) {
     }
-}
 
+    isEqual2 (other: Book ): boolean {
+	if ( (other.author === this.author) &&
+	     (other.title === this.title) 
+	) {
+	    return true;
+	}
+    }
+    
+    isEqual3 (other: Book ): boolean {
+	if ( (other.synopsis === this.synopsis) &&
+	     (this.isEqual2 (other))){ 
+	    return true;
+	}
+    }
+    
+    isEqual4 (other: Book ): boolean {
+	if (this.photo){
+	    if ( (other.photo === this.photo) &&
+		 this.isEqual3 (other) ){
+		return true;
+	    }
+	}
+    }
+
+    isEqual (other: Book ): boolean {
+	return (this === other);
+    }
+}
+    

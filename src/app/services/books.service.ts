@@ -14,7 +14,7 @@ export class BooksService {
     constructor() {
 	this.getBooks();
     }
-    
+
     emitBooks() {
 	this.booksSubject.next(this.books);
     }
@@ -23,21 +23,21 @@ export class BooksService {
 	firebase.database().ref('/books') /* accès au node /books */
 		.set(this.books);         /* put : remplace */
     }
-    
+
     getBooks() {
-	firebase.database().ref('/books') 
-		.on('value', /* réaction synchrone 
+	firebase.database().ref('/books')
+		.on('value', /* réaction synchrone
 				à chaque événement (value) de la DB
-				le callback est exécuté 
+				le callback est exécuté
 				à chaque modification de la DB */
 		    (data: DataSnapshot) => /* fonction de réaction */
-			{ 
+			{
 			    this.books = data.val() ? data.val() : [];
 			    this.emitBooks(); /* émission du Subject*/
 			}
 		);
     }
-    
+
     getSingleBook(id: number) {
 	console.log('Entering in getSingleBook id', id);
 	return new Promise(  /* réaction asynchrone */
@@ -54,11 +54,56 @@ export class BooksService {
 			     }
 	);
     }
-    
+
     createNewBook(newBook: Book) {
 	this.books.push(newBook);
 	this.saveBooks();
 	this.emitBooks();
+    }
+
+    areEqualBooks4 (book: Book, other: Book) {
+	console.log('Entering in areEqualBooks book ',book);
+	console.log('other for ',other);
+	(other) => {
+	    if ( (other.author == book.author) &&
+		 (other.title == book.title) &&
+		 (other.synopsis == book.synopsis)
+	    ) {
+		if (book.photo){
+		    if (other.photo == book.photo) {
+			return true;
+		    }
+		}
+		else {
+		    return true;
+		}
+	    }
+	}
+    }
+
+    areEqualBooks3 (book: Book, other: Book): boolean {
+	console.log('Entering in areEqualBooks book ',book);
+	console.log('other for ',other);
+	return (
+	    (other.author === book.author) &&
+	    (other.title === book.title) &&
+	    (other.synopsis === book.synopsis)
+	)
+    }
+
+    areEqualBooks (book: Book, other: Book): boolean {
+	console.log('Entering in areEqualBooks book ',book);
+	console.log('other for ',other);
+	return ( other === book) 
+    }
+
+    indexOfBook (book: Book) {
+	const bookIndex = this.books.findIndex(
+	    (a_book) => {return this.areEqualBooks3 (book, a_book)}
+	);
+	console.log('indexOfBook book ',book);
+	console.log('indexOfBook index ',bookIndex);
+	return bookIndex;
     }
 
     removeBook(book: Book) {
@@ -80,31 +125,21 @@ export class BooksService {
 			  }
 		      )
 	}
-	const bookIndexToRemove = this.books.findIndex(
-	    (bookEl) => {
-		if ( (bookEl.author == book.author) &&
-		     (bookEl.title == book.title) &&
-		     (bookEl.synopsis == book.synopsis) 
-		) {
-		    if (book.photo){
-			if (bookEl.photo == book.photo) {
-			    return true;
-			}
-		    }
-		    else {
-			return true;
-		    }
-		}
-	    }
-	);
+	const bookIndexToRemove = this.indexOfBook (book);
 	console.log('bookIndexToRemove ',bookIndexToRemove);
 	if (bookIndexToRemove === -1) {
-	    console.log('Error bookIndexToRemove ',bookIndexToRemove);
+	    console.log('Error Skipped bookIndexToRemove ',bookIndexToRemove);
 	    this.getBooks();
+
 	}
-	this.books.splice(bookIndexToRemove, 1);
-	this.saveBooks();
-	this.emitBooks();
+	else {
+	    // const bookIndex = this.books.findIndex (a_book => this.Book.isEqual(book));
+
+	    this.books.splice(bookIndexToRemove, 1);
+	    this.saveBooks();
+	    this.emitBooks();
+	}
+	
     }
 
     removeBookById(id: number) {
