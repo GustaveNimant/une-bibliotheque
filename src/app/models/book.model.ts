@@ -12,7 +12,7 @@ export class Book {
 	    return true;
 	}
     }
-    
+
     isEqual3 (other: Book ): boolean {
 	if ( (other.synopsis === this.synopsis) &&
 	     (this.isEqual2 (other))){ 

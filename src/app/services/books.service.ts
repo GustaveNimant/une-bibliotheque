@@ -8,11 +8,13 @@ import DataSnapshot = firebase.database.DataSnapshot;
 
 export class BooksService {
 
-    books: Book[] = [];
+    //    books: Book[] = [];
+    books = [new Book ('', '')]
     booksSubject = new Subject<Book[]>();
 
     constructor() {
 	this.getBooks();
+	console.log('In constructor books ', this.books);
     }
 
     emitBooks() {
@@ -33,6 +35,7 @@ export class BooksService {
 		    (data: DataSnapshot) => /* fonction de réaction */
 			{
 			    this.books = data.val() ? data.val() : [];
+			    // this.books = data.val() ? data.val().map(book => new Book(book[0], book[1])) : [];
 			    this.emitBooks(); /* émission du Subject*/
 			}
 		);
@@ -100,6 +103,7 @@ export class BooksService {
     indexOfBook (book: Book) {
 	const bookIndex = this.books.findIndex(
 	    (a_book) => {return this.areEqualBooks3 (book, a_book)}
+	    // (a_book) => {return book.isEqual (a_book)}
 	);
 	console.log('indexOfBook book ',book);
 	console.log('indexOfBook index ',bookIndex);
@@ -125,8 +129,10 @@ export class BooksService {
 			  }
 		      )
 	}
+
 	const bookIndexToRemove = this.indexOfBook (book);
 	console.log('bookIndexToRemove ',bookIndexToRemove);
+	
 	if (bookIndexToRemove === -1) {
 	    console.log('Error Skipped bookIndexToRemove ',bookIndexToRemove);
 	    this.getBooks();
