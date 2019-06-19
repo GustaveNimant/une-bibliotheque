@@ -80,8 +80,8 @@ export class BooksService {
 	console.log('Array books is ',this.books);
 	const bookType : string = typeof book;
 	console.log('Type of book is ',bookType);
-	if (book.photo){
-	    const storageRef = firebase.storage().refFromURL(book.photo);
+	if (book.image){
+	    const storageRef = firebase.storage().refFromURL(book.image);
 	    /* delete est asynchrone */
 	    storageRef.delete ()
 		      .then (

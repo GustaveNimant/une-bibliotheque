@@ -31,7 +31,7 @@ export class BookFormComponent implements OnInit {
 	    title: ['', Validators.required],
 	    author: ['', Validators.required],
 	    synopsis: '',
-	    photo: ''
+	    image: ''
 	});
     }
     
@@ -45,7 +45,7 @@ export class BookFormComponent implements OnInit {
 	newBook.synopsis = synopsis;
 	/* si un fichier a été chargé : il existe une URL */
  	if (this.fileUrl && this.fileUrl !== '') {
- 	    newBook.photo = this.fileUrl;
+ 	    newBook.image = this.fileUrl;
  	}
 	this.booksService.createNewBook(newBook);
 	this.router.navigate(['/books']);

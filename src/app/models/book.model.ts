@@ -1,5 +1,5 @@
 export class Book {
-    photo: string;
+    image: string;
     synopsis: string;
 
     constructor(public title: string, public author: string) {
@@ -23,8 +23,8 @@ export class Book {
     }
     
     isEqual4 (other: Book ): boolean {
-	if (this.photo){
-	    if ( (other.photo === this.photo) &&
+	if (this.image){
+	    if ( (other.image === this.image) &&
 		 this.isEqual3 (other) ){
 		return true;
 	    }
