@@ -16,6 +16,7 @@ import { BookListComponent } from './book-list/book-list.component';
 import { SingleBookComponent } from './book-single/book-single.component';
 import { BookFormComponent } from './book-form/book-form.component';
 import { HeaderComponent } from './header/header.component';
+import { ImageComponent } from './image/image.component';
 
 const appRoutes: Routes = [
     { path: 'auth/signup', component: SignupComponent },
@@ -35,7 +36,8 @@ const appRoutes: Routes = [
     BookListComponent,
     SingleBookComponent,
     BookFormComponent,
-    HeaderComponent
+    HeaderComponent,
+    ImageComponent
   ],
   imports: [
       BrowserModule,

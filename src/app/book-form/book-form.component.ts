@@ -54,7 +54,7 @@ export class BookFormComponent implements OnInit {
     onUploadFile (file: File) {
 	console.log ('Entering in onUploadFile');
 	this.fileIsUploading = true;
-	/* on déclanche, en asynchrone (then), le service pour le fichier en argument */
+	/* on déclenche, en asynchrone (then), le service pour le fichier en argument */
 	this.booksService.uploadFile(file)
 	    .then ( /* asynchrone */
 		(url: string) => {
@@ -67,7 +67,7 @@ export class BookFormComponent implements OnInit {
 	)
     }
 
-    detectFiles (event) { /* event provient du DOM, déclanche onUploadFile */
+    detectFiles (event) { /* event provient du DOM, déclenche onUploadFile */
 	/* limité à un seul fichier dans le template */
 	const a_file = event.target.files[0];
 	console.log ('Entering in detectFiles : event.target.file ', a_file);

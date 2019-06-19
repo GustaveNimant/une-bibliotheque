@@ -35,7 +35,7 @@ export class BooksService {
 				à chaque modification de la DB */
 		    (a_data: DataSnapshot) => /* fonction de réaction */
 			{
-			   // this.books = a_data.val() ? data.val() : [];
+			    // this.books = a_data.val() ? data.val() : [];
 			    this.books = a_data.val() ? a_data.val().map(book => new Book(book.title, book.author)) : [];
 			    this.emitBooks(); /* émission du Subject*/
 			}
@@ -110,12 +110,16 @@ export class BooksService {
 	    this.saveBooks();
 	    this.emitBooks();
 	}
-	
     }
 
     removeBookById(id: number) {
 	console.log('Entering in removeBookById withid ',id);
 	this.books.splice(id, 1);
+	this.saveBooks();
+	this.emitBooks();
+    }
+
+    updateBook(book: Book) {
 	this.saveBooks();
 	this.emitBooks();
     }
