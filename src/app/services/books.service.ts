@@ -22,6 +22,7 @@ export class BooksService {
     }
 
     saveBooks() {
+	console.log('Entering in saveBook');
 	firebase.database().ref('/books') /* accès au node /books */
 		.set(this.books);         /* semblable à put : remplace */
     }
@@ -120,6 +121,7 @@ export class BooksService {
     }
 
     updateBook(book: Book) {
+	console.log('Entering in updateBook with book ',book);
 	this.saveBooks();
 	this.emitBooks();
     }
