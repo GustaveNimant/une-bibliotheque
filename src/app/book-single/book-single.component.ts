@@ -30,7 +30,7 @@ export class SingleBookComponent implements OnInit {
 	    );
     }
     
-    onBack() {
+    onBackToBookList() {
 	this.router.navigate(['/books']);
     }
     

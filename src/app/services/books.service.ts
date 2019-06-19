@@ -68,7 +68,6 @@ export class BooksService {
     indexOfBook (book: Book) {
 	const bookIndex = this.books.findIndex(
 	    (a_book) => {
-//		const the_book = new Book(a_book.title, a_book.author); 
 		return a_book.isEqual3 (book)}
 	);
 	console.log('indexOfBook book ',book);
@@ -128,7 +127,7 @@ export class BooksService {
 		const almostUniqueFileName = Date.now().toString();
 		const upload = firebase.storage().ref()
 				       .child('images/' + almostUniqueFileName + file.name)
-				       .put(file);
+				       .put(file);                  /* écrase le fichier */
 		console.log('uploadFile : upload ', upload);
 		upload.on(firebase.storage.TaskEvent.STATE_CHANGED, /* On réagit à chaque changement d'état */
 			  () => { /* on suit le chargement */
