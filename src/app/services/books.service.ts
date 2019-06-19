@@ -9,7 +9,7 @@ import DataSnapshot = firebase.database.DataSnapshot;
 export class BooksService {
 
     //    books: Book[] = [];
-    books = [new Book ('', '')]
+    books = [new Book ('', '')];
     booksSubject = new Subject<Book[]>();
 
     constructor() {
@@ -23,19 +23,20 @@ export class BooksService {
 
     saveBooks() {
 	firebase.database().ref('/books') /* accès au node /books */
-		.set(this.books);         /* put : remplace */
+		.set(this.books);         /* semblable à put : remplace */
     }
 
     getBooks() {
+	console.log ('Entering in getBooks');
 	firebase.database().ref('/books')
 		.on('value', /* réaction synchrone
 				à chaque événement (value) de la DB
 				le callback est exécuté
 				à chaque modification de la DB */
-		    (data: DataSnapshot) => /* fonction de réaction */
+		    (a_data: DataSnapshot) => /* fonction de réaction */
 			{
-			    this.books = data.val() ? data.val() : [];
-			    // this.books = data.val() ? data.val().map(book => new Book(book[0], book[1])) : [];
+			   // this.books = a_data.val() ? data.val() : [];
+			    this.books = a_data.val() ? a_data.val().map(book => new Book(book.title, book.author)) : [];
 			    this.emitBooks(); /* émission du Subject*/
 			}
 		);
@@ -84,26 +85,11 @@ export class BooksService {
 	}
     }
 
-    areEqualBooks3 (book: Book, other: Book): boolean {
-	console.log('Entering in areEqualBooks book ',book);
-	console.log('other for ',other);
-	return (
-	    (other.author === book.author) &&
-	    (other.title === book.title) &&
-	    (other.synopsis === book.synopsis)
-	)
-    }
-
-    areEqualBooks (book: Book, other: Book): boolean {
-	console.log('Entering in areEqualBooks book ',book);
-	console.log('other for ',other);
-	return ( other === book) 
-    }
-
     indexOfBook (book: Book) {
 	const bookIndex = this.books.findIndex(
-	    (a_book) => {return this.areEqualBooks3 (book, a_book)}
-	    // (a_book) => {return book.isEqual (a_book)}
+	    (a_book) => {
+//		const the_book = new Book(a_book.title, a_book.author); 
+		return a_book.isEqual3 (book)}
 	);
 	console.log('indexOfBook book ',book);
 	console.log('indexOfBook index ',bookIndex);

@@ -15,9 +15,11 @@ export class Book {
 
     isEqual3 (other: Book ): boolean {
 	if ( (other.synopsis === this.synopsis) &&
-	     (this.isEqual2 (other))){ 
+	     (this.isEqual2 (other))){
+	    console.log ('In isEqual3 true');
 	    return true;
 	}
+	console.log ('In isEqual3 false');
     }
     
     isEqual4 (other: Book ): boolean {

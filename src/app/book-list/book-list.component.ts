@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 
 export class BookListComponent implements OnInit, OnDestroy {
 
-    books: Book[];
+    books = [new Book ('', '')];
+    //    books: Book[]; /* new Book ? */
     booksSubscription: Subscription;
 
     constructor(private booksService: BooksService,
@@ -23,9 +24,13 @@ export class BookListComponent implements OnInit, OnDestroy {
 	this.booksSubscription = this.booksService.booksSubject.subscribe(
 	    (books_a: Book[]) => {
 		this.books = books_a;
+		console.log('In ngOnInit typeof books_a ', (typeof books_a));
+
 	    }
 	);
 	this.booksService.getBooks();
+	console.log('In ngOnInit books ', this.books);
+	console.log('In ngOnInit typeof books ', (typeof this.books));
 	this.booksService.emitBooks();
     }
 
