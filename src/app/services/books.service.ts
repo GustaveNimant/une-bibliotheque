@@ -65,26 +65,6 @@ export class BooksService {
 	this.emitBooks();
     }
 
-    areEqualBooks4 (book: Book, other: Book) {
-	console.log('Entering in areEqualBooks book ',book);
-	console.log('other for ',other);
-	(other) => {
-	    if ( (other.author == book.author) &&
-		 (other.title == book.title) &&
-		 (other.synopsis == book.synopsis)
-	    ) {
-		if (book.photo){
-		    if (other.photo == book.photo) {
-			return true;
-		    }
-		}
-		else {
-		    return true;
-		}
-	    }
-	}
-    }
-
     indexOfBook (book: Book) {
 	const bookIndex = this.books.findIndex(
 	    (a_book) => {
@@ -142,13 +122,15 @@ export class BooksService {
     }
 
     uploadFile(file: File) {
-	return new Promise(
-	    (resolve, reject) => {
+	console.log('Entering in uploadFile with file ', file);
+	return new Promise(  /* asynchrone */
+			     (resolve, reject) => {
 		const almostUniqueFileName = Date.now().toString();
 		const upload = firebase.storage().ref()
-				       .child('images/' + almostUniqueFileName + file.name).put(file);
+				       .child('images/' + almostUniqueFileName + file.name)
+				       .put(file);
 		console.log('uploadFile : upload ', upload);
-		upload.on(firebase.storage.TaskEvent.STATE_CHANGED,
+		upload.on(firebase.storage.TaskEvent.STATE_CHANGED, /* On réagit à chaque changement d'état */
 			  () => { /* on suit le chargement */
 			      console.log('uploadFile : Chargement du fichier ', file.name);
 			  },
@@ -157,7 +139,7 @@ export class BooksService {
 			      reject();
 			  },
 			  () => { /* si tout se passe bien URL directe affichée dans single-book.component */
-			      //resolve(upload.snapshot.downloadURL);
+			      // resolve(upload.snapshot.downloadURL);
 			      resolve(upload.snapshot.ref.getDownloadURL());
 			  }
 		);

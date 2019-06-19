@@ -44,9 +44,9 @@ export class BookFormComponent implements OnInit {
 	//	console.log ('Entering in onSaveBook : ', this.fileUrl);
 	newBook.synopsis = synopsis;
 	/* si un fichier a été chargé : il existe une URL */
-//	if (this.fileUrl && this.fileUrl !== '') {
-//	    newBook.photo = this.fileUrl;
-//	}
+ 	if (this.fileUrl && this.fileUrl !== '') {
+ 	    newBook.photo = this.fileUrl;
+ 	}
 	this.booksService.createNewBook(newBook);
 	this.router.navigate(['/books']);
     }
@@ -55,20 +55,22 @@ export class BookFormComponent implements OnInit {
 	console.log ('Entering in onUploadFile');
 	this.fileIsUploading = true;
 	/* on déclanche, en asynchrone (then), le service pour le fichier en argument */
-	this.booksService.uploadFile(file).then ( 
-	    (url: string) => {
-		/* si le chargement réussi on récupère l'URL en réponse */
-		/* pour enregistrer l'URL */
-		this.fileUrl = url;
-		this.fileIsUploading = false;
-		this.fileUploaded = true;
-	    }
+	this.booksService.uploadFile(file)
+	    .then ( /* asynchrone */
+		(url: string) => {
+		    /* si le chargement réussi on récupère l'URL en réponse */
+		    /* pour enregistrer l'URL */
+		    this.fileUrl = url;
+		    this.fileIsUploading = false;
+		    this.fileUploaded = true;
+		}
 	)
     }
 
     detectFiles (event) { /* event provient du DOM, déclanche onUploadFile */
 	/* limité à un seul fichier dans le template */
-	console.log ('Entering in detectFiles : event.target.file ', event.target.files[0]);
-	this.onUploadFile(event.target.files[0]);
+	const a_file = event.target.files[0];
+	console.log ('Entering in detectFiles : event.target.file ', a_file);
+	this.onUploadFile(a_file);
     }
 }
