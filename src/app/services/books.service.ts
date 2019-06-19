@@ -138,7 +138,7 @@ export class BooksService {
 			      console.log('uploadFile : Erreur de chargement ! : ', error);
 			      reject();
 			  },
-			  () => { /* si tout se passe bien URL directe affichée dans single-book.component */
+			  () => { /* si tout se passe bien URL directe affichée dans book-single.component */
 			      // resolve(upload.snapshot.downloadURL);
 			      resolve(upload.snapshot.ref.getDownloadURL());
 			  }

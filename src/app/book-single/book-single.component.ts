@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Book } from '../../models/book.model';
+import { Book } from '../models/book.model';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BooksService } from '../../services/books.service';
+import { BooksService } from '../services/books.service';
 
 @Component({
-    selector: 'app-single-book',
-    templateUrl: './single-book.component.html',
-    styleUrls: ['./single-book.component.scss']
+    selector: 'app-book-single',
+    templateUrl: './book-single.component.html',
+    styleUrls: ['./book-single.component.scss']
 })
 
 export class SingleBookComponent implements OnInit {

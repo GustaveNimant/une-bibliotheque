@@ -39,6 +39,7 @@ speed-measure-plugin.json
 /connect.lock
 /coverage
 /libpeerconnection.log
+nohup.out
 npm-debug.log
 yarn-error.log
 testem.log

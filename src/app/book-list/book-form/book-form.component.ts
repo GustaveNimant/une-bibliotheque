@@ -30,8 +30,8 @@ export class BookFormComponent implements OnInit {
 	this.bookForm = this.formBuilder.group({
 	    title: ['', Validators.required],
 	    author: ['', Validators.required],
-	    photo: '',
-	    synopsis: ''
+	    synopsis: '',
+	    photo: ''
 	});
     }
     
