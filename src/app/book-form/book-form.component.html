@@ -26,7 +26,6 @@
 		<h4>Ajouter une image</h4>
 		<input type="file"
 		       (change)="detectFiles($event)"
-		       class="form-control" 
 		       accept="image/*"> <!-- fichiers images seuls *.png .jpg ... -->
 		<p class="text-success"
 		   *ngIf="fileUploaded">Fichier image chargé !</p>
