@@ -4,12 +4,13 @@
 	     *ngIf="book.image"
 	     [src]="book.image"> <!-- Url chargement du fichier -->
 	<h1>{{ book.title }}</h1>
-	<h2>{{ book.author }}</h2>
+	<h2>par {{ book.author }}</h2>
 	<p>{{ book.synopsis }}</p>
-	<button class="btn btn-default"
-		       (click)="onBackToBookList()">Retour à la liste des livres</button>
-	<button class="btn btn-default"
-		(click)="onRemoveBook()">Supprimer ce livre</button>
+	<button class="btn btn-primary"
+		(click)="onBackToBookList()">Retour à la liste des livres</button>
+	&nbsp;
+	<button class="btn btn-danger"
+		       (click)="onRemoveBook()">Supprimer ce livre</button>
 
 	<!-- ERROR -->
 	<div class="form-group">
