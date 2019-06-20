@@ -38,5 +38,14 @@ export class Book {
     isEqual (other: Book ): boolean {
 	return (this === other);
     }
+
+    copyFromAnyToBook (other:any) : Book {
+	const a_book = new Book (other.title, other.author);
+	a_book.synopsis = this.synopsis;
+	if (other.image){
+	    a_book.image = other.image; 
+	}
+	console.log ('In copyFromAnyToBook other', other,' copy ',a_book);
+	return a_book;	
+    }
 }
-    

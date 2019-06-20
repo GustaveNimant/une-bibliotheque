@@ -64,7 +64,7 @@ export class BooksService {
     }
 
     createNewBook(newBook: Book) {
-	console.log('Enetring in createNewBook newBook ',newBook);
+	console.log('Entering in createNewBook newBook ',newBook);
 	this.books.push(newBook);
 	this.saveToFirebaseBooks();
 	this.emitBooks();
