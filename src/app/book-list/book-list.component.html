@@ -1,18 +1,19 @@
 <div class="row">
     <div class="col-xs-12">
-	<h2>Les livres</h2>
+	<h2>La liste des livres</h2>
 	<div class="list-group">
 	    
 	    <!-- start of loop on books -->
 	    <button
 		class="list-group-item"
-		       *ngFor="let book of books; let id = index"
-		       (click)="onViewBook(id)">
+		*ngFor="let book of books; let id = index"
+		(click)="onViewBook(id)">
 		<h3 class="list-group-item-heading">
 		    Titre : {{ book.title }}
 		    <!-- skipped code -->
-		    <button class="btn btn-default pull-right"
-			    (click)="onDeleteBook(book)">
+		    <button
+			class="btn btn-default pull-right"
+			(click)="onDeleteBook(book)">
 			<span class="glyphicon glyphicon-minus"></span>
 		    </button>
 		    <!-- end of skipped code -->
