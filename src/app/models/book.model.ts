@@ -9,17 +9,21 @@ export class Book {
 	if ( (other.author === this.author) &&
 	     (other.title === this.title) 
 	) {
+	    console.log ('In isEqual2 true');
 	    return true;
+	    
 	}
+	console.log ('In isEqual2 false');
     }
-
+    
     isEqual3 (other: Book ): boolean {
-	if ( (other.synopsis === this.synopsis) &&
-	     (this.isEqual2 (other))){
+	if ((this.isEqual2 (other)) &&
+	    (other.synopsis === this.synopsis)
+	){
 	    console.log ('In isEqual3 true');
 	    return true;
 	}
-	console.log ('In isEqual3 false');
+	console.log ('In isEqual3 false other.synopsis', other.synopsis,' this.synopsis',this.synopsis);
     }
     
     isEqual4 (other: Book ): boolean {

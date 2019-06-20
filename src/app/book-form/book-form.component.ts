@@ -41,11 +41,11 @@ export class BookFormComponent implements OnInit {
 	const author = this.bookForm.get('author').value;
 	const synopsis = this.bookForm.get('synopsis').value;
 	const newBook = new Book(title, author);
-	//	console.log ('Entering in onSaveBook : ', this.fileUrl);
 	newBook.synopsis = synopsis;
 	/* si un fichier a été chargé : il existe une URL */
  	if (this.fileUrl && this.fileUrl !== '') {
  	    newBook.image = this.fileUrl;
+	    console.log ('In onSaveBook image ', this.fileUrl);
  	}
 	this.booksService.createNewBook(newBook);
 	this.router.navigate(['/books']);

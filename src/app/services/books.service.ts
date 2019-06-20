@@ -21,13 +21,13 @@ export class BooksService {
 	this.booksSubject.next(this.books);
     }
 
-    saveBooks() {
-	console.log('Entering in saveBook');
+    saveToFirebaseBooks() {
+	console.log('Entering in saveToFirebaseBooks with books ', this.books);
 	firebase.database().ref('/books') /* accès au node /books */
 		.set(this.books);         /* semblable à put : remplace */
     }
 
-    getBooks() {
+    getBooks() { /* Only two properties title and author are copied */
 	console.log ('Entering in getBooks');
 	firebase.database().ref('/books')
 		.on('value', /* réaction synchrone
@@ -36,8 +36,11 @@ export class BooksService {
 				à chaque modification de la DB */
 		    (a_data: DataSnapshot) => /* fonction de réaction */
 			{
-			    // this.books = a_data.val() ? data.val() : [];
-			    this.books = a_data.val() ? a_data.val().map(book => new Book(book.title, book.author)) : [];
+			    const the_books = a_data.val() ? a_data.val() : [];
+			    console.log('In getBooks the_books',the_books);
+			    console.log('In getBooks typeof the_books',(typeof the_books));
+			    this.books = the_books.map(book => new Book(book.title, book.author));
+			    console.log('In getBooks this.books',this.books);
 			    this.emitBooks(); /* émission du Subject*/
 			}
 		);
@@ -61,15 +64,16 @@ export class BooksService {
     }
 
     createNewBook(newBook: Book) {
+	console.log('Enetring in createNewBook newBook ',newBook);
 	this.books.push(newBook);
-	this.saveBooks();
+	this.saveToFirebaseBooks();
 	this.emitBooks();
     }
 
     indexOfBook (book: Book) {
 	const bookIndex = this.books.findIndex(
 	    (a_book) => {
-		return a_book.isEqual3 (book)}
+		return a_book.isEqual2 (book)}
 	);
 	console.log('indexOfBook book ',book);
 	console.log('indexOfBook index ',bookIndex);
@@ -108,7 +112,7 @@ export class BooksService {
 	    // const bookIndex = this.books.findIndex (a_book => this.Book.isEqual(book));
 
 	    this.books.splice(bookIndexToRemove, 1);
-	    this.saveBooks();
+	    this.saveToFirebaseBooks();
 	    this.emitBooks();
 	}
     }
@@ -116,13 +120,13 @@ export class BooksService {
     removeBookById(id: number) {
 	console.log('Entering in removeBookById withid ',id);
 	this.books.splice(id, 1);
-	this.saveBooks();
+	this.saveToFirebaseBooks();
 	this.emitBooks();
     }
 
     updateBook(book: Book) {
 	console.log('Entering in updateBook with book ',book);
-	this.saveBooks();
+	this.saveToFirebaseBooks();
 	this.emitBooks();
     }
 

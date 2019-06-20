@@ -26,7 +26,7 @@ export class SingleBookComponent implements OnInit {
 	const id = this.route.snapshot.params['id']; /* récupération de l'id depuis l'URL*/
 	console.log ('ngOnInit : clicked book id', id);
 	this.booksService.getSingleBook(+id)
-	    .then( /* dès que le book est disponible */
+	    .then( /* dès que book est disponible */
 		   (book: Book) => {
 		       this.book = book;
 		   }
@@ -44,10 +44,10 @@ export class SingleBookComponent implements OnInit {
 
     onSaveImage() {
 	console.log ('Entering in onSaveImage with book', this.book);
-
 	if (this.fileUrl && this.fileUrl !== '') {
  	    this.book.image = this.fileUrl;
  	}
+	console.log ('onSaveImage book', this.book);
 	this.booksService.updateBook(this.book);
 	this.router.navigate(['/books']);
     }
