@@ -39,7 +39,8 @@ export class BooksService {
 			    const the_books = a_data.val() ? a_data.val() : [];
 			    console.log('In getBooks the_books',the_books);
 			    console.log('In getBooks typeof the_books',(typeof the_books));
-			    this.books = the_books.map(book => new Book(book.title, book.author));
+			    // this.books = the_books.map(book => new Book(book.title, book.author));
+			    this.books = the_books; 
 			    console.log('In getBooks this.books',this.books);
 			    this.emitBooks(); /* émission du Subject*/
 			}
@@ -70,10 +71,21 @@ export class BooksService {
 	this.emitBooks();
     }
 
+    areEqual (book: Book, other: Book ): boolean {
+	if ( (other.author === book.author) &&
+	     (other.title === book.title) 
+	) {
+	    console.log ('In areEqual true');
+	    return true;
+	    
+	}
+	console.log ('In areEqual false');
+    }
+
     indexOfBook (book: Book) {
 	const bookIndex = this.books.findIndex(
 	    (a_book) => {
-		return a_book.isEqual2 (book)}
+		return this.areEqual (book, a_book)}
 	);
 	console.log('indexOfBook book ',book);
 	console.log('indexOfBook index ',bookIndex);

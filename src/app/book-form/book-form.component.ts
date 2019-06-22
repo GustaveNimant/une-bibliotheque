@@ -51,11 +51,11 @@ export class BookFormComponent implements OnInit {
 	this.router.navigate(['/books']);
     }
 
-    onUploadFile (file: File) {
+    onUploadFile (a_file: File) {
 	console.log ('Entering in onUploadFile');
 	this.fileIsUploading = true;
 	/* on déclenche, en asynchrone (then), le service pour le fichier en argument */
-	this.booksService.uploadFile(file)
+	this.booksService.uploadFile(a_file)
 	    .then ( /* asynchrone */
 		(url: string) => {
 		    /* si le chargement réussi on récupère l'URL en réponse */
